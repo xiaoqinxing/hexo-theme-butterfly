@@ -44,9 +44,9 @@ if theme.subtitle.enable
           })
           .then(function (data) {
             if (subtitleEffect) {
-              var from = '出自 ' + data.from
+              //- var from = '出自 ' + data.from
               var sub = '!{theme.subtitle.sub}'.length == 0 ? new Array() : '!{theme.subtitle.sub}'.split(',')
-              var both = sub.unshift(data.hitokoto, from)
+              var both = sub.unshift(data.hitokoto)
               var typed = new Typed('#subtitle', {
                 strings: sub,
                 startDelay: 300,
@@ -71,9 +71,9 @@ if theme.subtitle.enable
           var subtitleEffect = !{ subtitleEffect }
           var con = str[0]
           if (subtitleEffect) {
-            var from = '出自 ' + str[1]
+            //- var from = '出自 ' + str[1]
             var sub = '!{theme.subtitle.sub}'.length == 0 ? new Array() : '!{theme.subtitle.sub}'.split(',')
-            var both = sub.unshift(con, from)
+            var both = sub.unshift(con)
             var typed = new Typed('#subtitle', {
               strings: sub,
               startDelay: 300,
