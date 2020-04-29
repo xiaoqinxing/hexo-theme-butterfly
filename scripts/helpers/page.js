@@ -8,16 +8,16 @@
 
 'use strict'
 
-const { stripHTML } = require('hexo-util')
+const { stripHTML, escapeHTML } = require('hexo-util')
 
 hexo.extend.helper.register('page_description', function () {
   const { config, page } = this
   let description = page.description || page.content || page.title || config.description
 
   if (description) {
-    description = stripHTML(description).substring(0, 200)
+    description = escapeHTML(stripHTML(description).substring(0, 200)
       .trim()
-      .replace(/\n/g, ' ')
+    ).replace(/\n/g, ' ')
     return description
   }
 })
@@ -31,8 +31,13 @@ hexo.extend.helper.register('injectHtml', function (data) {
   return result
 })
 
-hexo.extend.helper.register('cloudTags', function (source, minfontsize, maxfontsize, limit) {
+hexo.extend.helper.register('cloudTags', function (options = {}) {
   const env = this
+  const source = options.source
+  const minfontsize = options.minfontsize
+  const maxfontsize = options.maxfontsize
+  const limit = options.limit
+
   let result = ''
   const tagLimit = limit === 0 ? source.length : limit
   source.sort('name').limit(tagLimit).forEach(function (tags) {
